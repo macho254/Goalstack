@@ -3,6 +3,8 @@ import Dashboard from "./pages/Dashboard";
 import AddGoal from "./pages/AddGoal";
 import GoalDetails from "./pages/GoalDetails";
 import Navbar from "./components/Navbar";
+import Profile from "./pages/Profile";
+
 
 export default function App() {
   return (
@@ -13,6 +15,7 @@ export default function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/add" element={<AddGoal />} />
           <Route path="/goal/:id" element={<GoalDetails />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
     </Router>
