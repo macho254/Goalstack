@@ -1,56 +1,79 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-export default function AddGoal() {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [amount, setAmount] = useState("");
-  const [months, setMonths] = useState("");
+const AddGoal = () => {
+  const [form, setForm] = useState({
+    title: "",
+    description: "",
+    amount: "",
+    months: "",
+  });
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const goal = { title, description, amount: Number(amount), months: Number(months) };
-    console.log(goal); // Later we'll POST this to backend
-    setTitle(""); setDescription(""); setAmount(""); setMonths("");
+    try {
+      await fetch("http://localhost:5000/api/goals", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      navigate("/"); // redirect to dashboard
+    } catch (err) {
+      console.error("Error adding goal:", err);
+    }
   };
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-4">Add a New Goal</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="p-4">
+      <h1 className="text-xl font-bold mb-4">Add New Goal</h1>
+      <form
+        onSubmit={handleSubmit}
+        className="bg-blue-50 p-4 rounded-lg shadow-md"
+      >
         <input
-          type="text"
-          placeholder="Goal Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="w-full p-2 border rounded"
-          required
+          name="title"
+          placeholder="Title"
+          value={form.title}
+          onChange={handleChange}
+          className="w-full p-2 mb-2 border rounded"
         />
         <textarea
+          name="description"
           placeholder="Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          className="w-full p-2 border rounded"
+          value={form.description}
+          onChange={handleChange}
+          className="w-full p-2 mb-2 border rounded"
         />
         <input
           type="number"
-          placeholder="Amount"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          className="w-full p-2 border rounded"
-          required
+          name="amount"
+          placeholder="Target Amount"
+          value={form.amount}
+          onChange={handleChange}
+          className="w-full p-2 mb-2 border rounded"
         />
         <input
           type="number"
+          name="months"
           placeholder="Months"
-          value={months}
-          onChange={(e) => setMonths(e.target.value)}
-          className="w-full p-2 border rounded"
-          required
+          value={form.months}
+          onChange={handleChange}
+          className="w-full p-2 mb-4 border rounded"
         />
-        <button type="submit" className="bg-indigo-600 text-white px-4 py-2 rounded">
+        <button
+          type="submit"
+          className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition"
+        >
           Save Goal
         </button>
       </form>
     </div>
   );
-}
+};
+
+export default AddGoal;

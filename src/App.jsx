@@ -4,6 +4,7 @@ import AddGoal from "./pages/AddGoal";
 import GoalDetails from "./pages/GoalDetails";
 import Navbar from "./components/Navbar";
 import Profile from "./pages/Profile";
+import { Toaster } from "react-hot-toast";
 
 
 export default function App() {
@@ -14,10 +15,11 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/add" element={<AddGoal />} />
-          <Route path="/goal/:id" element={<GoalDetails />} />
+          <Route path="/goals/:id" element={<GoalDetails />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
+      
     </Router>
   );
 }

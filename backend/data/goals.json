@@ -1,0 +1,18 @@
+[
+  {
+    "id": "edc8afb5-4e57-46b7-8cba-90aca4b2241a",
+    "title": "Buy a phone",
+    "description": "saving to buy a phone",
+    "amount": 40000,
+    "months": 2,
+    "saved": 30000
+  },
+  {
+    "id": "4634533f-9294-433b-a81e-7fb4120fe1f7",
+    "title": "Buy  laptop",
+    "description": "saving to buy a laptop",
+    "amount": 3500,
+    "months": 3,
+    "saved": 3500
+  }
+]
