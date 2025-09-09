@@ -1,18 +1,19 @@
 [
   {
-    "id": "edc8afb5-4e57-46b7-8cba-90aca4b2241a",
-    "title": "Buy a phone",
-    "description": "saving to buy a phone",
-    "amount": 40000,
-    "months": 2,
-    "saved": 30000
+    "id": "5d44e38a-f4f7-4fad-a4a3-4505a8f05640",
+    "title": "buy bitcoin",
+    "description": "saving to add my crypto portfolio",
+    "amount": 3000,
+    "months": "3",
+    "saved": 0
   },
   {
-    "id": "4634533f-9294-433b-a81e-7fb4120fe1f7",
-    "title": "Buy  laptop",
-    "description": "saving to buy a laptop",
-    "amount": 3500,
-    "months": 3,
-    "saved": 3500
+    "id": "6e16ba18-6c8d-4178-89dc-9e928748b469",
+    "userId": "user-123",
+    "title": "Buy Bitcoin",
+    "description": "saving to improve my crypto portfolio",
+    "amount": "30000",
+    "months": "3",
+    "saved": 0
   }
 ]

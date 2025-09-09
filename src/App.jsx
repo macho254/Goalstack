@@ -5,10 +5,12 @@ import GoalDetails from "./pages/GoalDetails";
 import Navbar from "./components/Navbar";
 import Profile from "./pages/Profile";
 import { Toaster } from "react-hot-toast";
+import { UserProvider } from "./context/UserContext";
 
 
 export default function App() {
   return (
+  <UserProvider>
     <Router>
       <Navbar />
       <div className="max-w-4xl mx-auto p-4">
@@ -19,8 +21,10 @@ export default function App() {
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
-      
+     <Toaster position = "top-right"/>  
     </Router>
+  </UserProvider>
+    
   );
 }
  

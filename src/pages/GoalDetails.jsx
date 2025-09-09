@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import Confetti from "react-confetti";
-import { useWindowSize } from "react-use"; // optional helper hook
+import { useWindowSize } from "react-use"; 
+import { useUser } from "../context/UserContext";
+
 
 
 
@@ -21,10 +23,12 @@ export default function GoalDetails() {
     amount: "",
     months: "",
   });
+ const currentUser = useUser();
+
 
   // fetch goal details
   useEffect(() => {
-    fetch(`https://goalstack-1.onrender.com/api/goals/${id}`)
+    fetch(`http://localhost:5000/api/goals/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setGoal(data);
@@ -39,7 +43,7 @@ export default function GoalDetails() {
 
   // delete
   const handleDelete = async () => {
-    await fetch(`https://goalstack-1.onrender.com/api/goals/${id}`, {
+    await fetch(`http://localhost:5000/api/goals/${id}`, {
       method: "DELETE",
     });
     navigate("/");
@@ -72,13 +76,13 @@ const handleUpdateSaved = async () => {
               toast.dismiss(t.id);
 
               // Proceed with capped update
-              await fetch(`https://goalstack-1.onrender.com/api/goals/${id}/saved`, {
+              await fetch(`http://localhost:5000/api/users/${currentUser.id}/goals/${goal.id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ saved: increment }),
               });
 
-              const res = await fetch(`https://goalstack-1.onrender.com/api/goals/${id}`);
+              const res = await fetch(`http://localhost:5000/api/goals/${id}`);
               const updated = await res.json();
               setGoal(updated);
 
@@ -105,13 +109,13 @@ const handleUpdateSaved = async () => {
   }
 
   // ✅ Normal update
-  await fetch(`https://goalstack-1.onrender.com/api/goals/${id}/saved`, {
+  await fetch(`http://localhost:5000/api/goals/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ saved: increment }),
   });
 
-  const res = await fetch(`https://goalstack-1.onrender.com/api/goals/${id}`);
+  const res = await fetch(`http://localhost:5000/api/goals/${id}`);
   const updated = await res.json();
   setGoal(updated);
 
@@ -143,7 +147,7 @@ const handleUpdateSaved = async () => {
             onClick={async () => {
               toast.dismiss(t.id);
 
-              await fetch(`https://goalstack-1.onrender.com/api/goals/${id}`, {
+              await fetch(`http://localhost:5000/api/goals/${id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -154,7 +158,7 @@ const handleUpdateSaved = async () => {
                 }),
               });
 
-              const res = await fetch(`https://goalstack-1.onrender.com/api/goals/${id}`);
+              const res = await fetch(`http://localhost:5000/goals/${id}`);
               const updated = await res.json();
               setGoal(updated);
               setEditMode(false);
@@ -178,7 +182,7 @@ const handleUpdateSaved = async () => {
     return;
   }
 
-  await fetch(`https://goalstack-1.onrender.com/api/goals/${id}`, {
+  await fetch(`http://localhost:5000/api/goals/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -189,7 +193,7 @@ const handleUpdateSaved = async () => {
     }),
   });
 
-  const res = await fetch(`https://goalstack-1.onrender.com/api/goals/${id}`);
+  const res = await fetch(`http://localhost:5000/api/goals/${id}`);
   const updated = await res.json();
   setGoal(updated);
   setEditMode(false);

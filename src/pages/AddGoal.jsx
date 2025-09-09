@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../context/UserContext";
+
 
 const AddGoal = () => {
+  const currentUser = useUser();
   const [form, setForm] = useState({
     title: "",
     description: "",
@@ -17,7 +20,7 @@ const AddGoal = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await fetch("https://goalstack-1.onrender.com/api/goals", {
+      await fetch(`http://localhost:5000/api/users/${currentUser.id}/goals`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),

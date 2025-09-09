@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import GoalCard from "../components/GoalCard";
+import { useUser } from "../context/UserContext";
+
 
 const Dashboard = () => {
   const [goals, setGoals] = useState([]);
+  const currentUser = useUser();
 
   // Fetch goals from backend
   useEffect(() => {
+    if (!currentUser) return;
     const fetchGoals = async () => {
       try {
-        const res = await fetch("https://goalstack-1.onrender.com/api/goals"); // Make sure this matches your server
+        const res = await fetch(`http://localhost:5000/api/users/${currentUser.id}/goals`);
         const data = await res.json();
         setGoals(data);
       } catch (err) {

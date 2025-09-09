@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { useUser } from "../context/UserContext";
+
 
 function Profile() {
   const [goals, setGoals] = useState([]);
+  const currentUser = useUser();
 
   useEffect(() => {
     const fetchGoals = async () => {
       try {
-        const res = await fetch("https://goalstack-1.onrender.com/api/goals");
+        const res = await fetch(`http://localhost:5000/api/users/${currentUser.id}/goals`);
         const data = await res.json();
         setGoals(data);
       } catch (error) {
