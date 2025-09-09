@@ -1,6 +1,6 @@
 { 
   "type": "module",
-  "name": "backend",
+  "name": "goalstack-backend",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
