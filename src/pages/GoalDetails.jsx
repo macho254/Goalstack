@@ -24,7 +24,7 @@ export default function GoalDetails() {
 
   // fetch goal details
   useEffect(() => {
-    fetch(`http://localhost:5000/api/goals/${id}`)
+    fetch(`https://goalstack-1.onrender.com/api/goals/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setGoal(data);
@@ -39,7 +39,7 @@ export default function GoalDetails() {
 
   // delete
   const handleDelete = async () => {
-    await fetch(`http://localhost:5000/api/goals/${id}`, {
+    await fetch(`https://goalstack-1.onrender.com/api/goals/${id}`, {
       method: "DELETE",
     });
     navigate("/");
@@ -72,13 +72,13 @@ const handleUpdateSaved = async () => {
               toast.dismiss(t.id);
 
               // Proceed with capped update
-              await fetch(`http://localhost:5000/api/goals/${id}/saved`, {
+              await fetch(`https://goalstack-1.onrender.com/api/goals/${id}/saved`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ saved: increment }),
               });
 
-              const res = await fetch(`http://localhost:5000/api/goals/${id}`);
+              const res = await fetch(`https://goalstack-1.onrender.com/api/goals/${id}`);
               const updated = await res.json();
               setGoal(updated);
 
@@ -105,13 +105,13 @@ const handleUpdateSaved = async () => {
   }
 
   // ✅ Normal update
-  await fetch(`http://localhost:5000/api/goals/${id}/saved`, {
+  await fetch(`https://goalstack-1.onrender.com/api/goals/${id}/saved`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ saved: increment }),
   });
 
-  const res = await fetch(`http://localhost:5000/api/goals/${id}`);
+  const res = await fetch(`https://goalstack-1.onrender.com/api/goals/${id}`);
   const updated = await res.json();
   setGoal(updated);
 
@@ -143,7 +143,7 @@ const handleUpdateSaved = async () => {
             onClick={async () => {
               toast.dismiss(t.id);
 
-              await fetch(`http://localhost:5000/api/goals/${id}`, {
+              await fetch(`https://goalstack-1.onrender.com/api/goals/${id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -154,7 +154,7 @@ const handleUpdateSaved = async () => {
                 }),
               });
 
-              const res = await fetch(`http://localhost:5000/api/goals/${id}`);
+              const res = await fetch(`https://goalstack-1.onrender.com/api/goals/${id}`);
               const updated = await res.json();
               setGoal(updated);
               setEditMode(false);
@@ -178,7 +178,7 @@ const handleUpdateSaved = async () => {
     return;
   }
 
-  await fetch(`http://localhost:5000/api/goals/${id}`, {
+  await fetch(`https://goalstack-1.onrender.com/api/goals/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -189,7 +189,7 @@ const handleUpdateSaved = async () => {
     }),
   });
 
-  const res = await fetch(`http://localhost:5000/api/goals/${id}`);
+  const res = await fetch(`https://goalstack-1.onrender.com/api/goals/${id}`);
   const updated = await res.json();
   setGoal(updated);
   setEditMode(false);

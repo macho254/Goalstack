@@ -6,7 +6,7 @@ function Profile() {
   useEffect(() => {
     const fetchGoals = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/goals");
+        const res = await fetch("https://goalstack-1.onrender.com/api/goals");
         const data = await res.json();
         setGoals(data);
       } catch (error) {

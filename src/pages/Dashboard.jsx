@@ -8,7 +8,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchGoals = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/goals"); // Make sure this matches your server
+        const res = await fetch("https://goalstack-1.onrender.com/api/goals"); // Make sure this matches your server
         const data = await res.json();
         setGoals(data);
       } catch (err) {
