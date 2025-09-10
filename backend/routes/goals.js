@@ -26,6 +26,21 @@ router.get("/users/:userId/goals", (req, res) => {
   res.json(userGoals);
 });
 
+// ✅ GET a single goal for a user
+router.get("/users/:userId/goals/:goalId", (req, res) => {
+  const { userId, goalId } = req.params;
+  const goals = readGoals();
+
+  const goal = goals.find((g) => g.id === goalId && g.userId === userId);
+
+  if (!goal) {
+    return res.status(404).json({ error: "Goal not found" });
+  }
+
+  res.json(goal);
+});
+
+
 // ✅ POST add a new goal for a user
 router.post("/users/:userId/goals", (req, res) => {
   const { title, description, amount, months } = req.body;

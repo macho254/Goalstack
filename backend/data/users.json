@@ -1,2 +1,9 @@
-[]
+[
+  {
+    "id": "user-123",
+    "name": "Guest",
+    "avatar": "https://i.pravatar.cc/150?u=user-123"
+  }
+]
+
  

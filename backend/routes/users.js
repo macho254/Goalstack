@@ -48,11 +48,35 @@ router.post("/", (req, res) => {
 });
 
 // GET user by ID
-router.get("/:id", (req, res) => {
+router.get("/users/:userId", (req, res) => {
   const users = readUsers();
   const user = users.find((u) => u.id === req.params.id);
   if (!user) return res.status(404).json({ error: "User not found" });
   res.json(user);
+});
+
+// GET user profile
+router.get("/users/:userId", (req, res) => {
+  const users = readUsers(); // 🔍 helper for users.json
+  const user = users.find((u) => u.id === req.params.userId);
+
+  if (!user) return res.status(404).json({ error: "User not found" });
+  res.json(user);
+});
+
+// ✅ Update user profile
+router.put("/users/:userId", (req, res) => {
+  const users = readUsers();
+  const idx = users.findIndex((u) => u.id === req.params.userId);
+
+  if (idx === -1) {
+    return res.status(404).json({ error: "User not found" });
+  }
+
+  users[idx] = { ...users[idx], ...req.body }; // merge updates
+  writeUsers(users);
+
+  res.json(users[idx]);
 });
 
 export default router;

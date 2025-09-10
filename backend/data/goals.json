@@ -8,12 +8,21 @@
     "saved": 0
   },
   {
-    "id": "6e16ba18-6c8d-4178-89dc-9e928748b469",
+    "id": "d15ec64a-6fb2-4d7e-967a-6e4289b0bc2e",
     "userId": "user-123",
     "title": "Buy Bitcoin",
-    "description": "saving to improve my crypto portfolio",
-    "amount": "30000",
-    "months": "3",
-    "saved": 0
+    "description": "saving to increase my crypto portfolio",
+    "amount": 40000,
+    "months": 3,
+    "saved": 40000
+  },
+  {
+    "id": "c801249f-d046-4e62-9377-aa88820c9d72",
+    "userId": "undefined",
+    "title": "Buy bitcoin",
+    "description": "saving to increase my crypto portfolio",
+    "amount": 2000,
+    "months": 2,
+    "saved": 3000
   }
 ]

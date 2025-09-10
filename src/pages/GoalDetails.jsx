@@ -27,8 +27,8 @@ export default function GoalDetails() {
 
 
   // fetch goal details
-  useEffect(() => {
-    fetch(`http://localhost:5000/api/goals/${id}`)
+ useEffect(() => {
+    fetch(`http://localhost:5000/api/users/${currentUser.id}/goals/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setGoal(data);
@@ -43,7 +43,7 @@ export default function GoalDetails() {
 
   // delete
   const handleDelete = async () => {
-    await fetch(`http://localhost:5000/api/goals/${id}`, {
+    await fetch(`http://localhost:5000/api/users/${currentUser.id}/goals/${id}`, {
       method: "DELETE",
     });
     navigate("/");
@@ -79,10 +79,10 @@ const handleUpdateSaved = async () => {
               await fetch(`http://localhost:5000/api/users/${currentUser.id}/goals/${goal.id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ saved: increment }),
+                body: JSON.stringify({ saved:  Math.min(Number(goal.saved) + increment, goal.amount )}), // cap at max
               });
 
-              const res = await fetch(`http://localhost:5000/api/goals/${id}`);
+              const res = await fetch(`http://localhost:5000/api/users/${currentUser.id}/goals/${id}`);
               const updated = await res.json();
               setGoal(updated);
 
@@ -109,13 +109,14 @@ const handleUpdateSaved = async () => {
   }
 
   // ✅ Normal update
-  await fetch(`http://localhost:5000/api/goals/${id}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ saved: increment }),
-  });
+await fetch(`http://localhost:5000/api/users/${currentUser.id}/goals/${id}/saved`, {
+  method: "PUT",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ saved: Number(goal.saved) + increment }),  // 👈 Add instead of replace
+});
 
-  const res = await fetch(`http://localhost:5000/api/goals/${id}`);
+
+  const res = await fetch(`http://localhost:5000/api/users/${currentUser.id}/goals/${id}`);
   const updated = await res.json();
   setGoal(updated);
 
@@ -147,7 +148,7 @@ const handleUpdateSaved = async () => {
             onClick={async () => {
               toast.dismiss(t.id);
 
-              await fetch(`http://localhost:5000/api/goals/${id}`, {
+              await fetch(`http://localhost:5000/api/users/${currentUser.id}/goals/${id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -158,7 +159,7 @@ const handleUpdateSaved = async () => {
                 }),
               });
 
-              const res = await fetch(`http://localhost:5000/goals/${id}`);
+              const res = await fetch(`http://localhost:5000/api/users/${currentUser.id}/goals/${id}`);
               const updated = await res.json();
               setGoal(updated);
               setEditMode(false);
@@ -182,7 +183,7 @@ const handleUpdateSaved = async () => {
     return;
   }
 
-  await fetch(`http://localhost:5000/api/goals/${id}`, {
+  await fetch(`http://localhost:5000/api/users/${currentUser.id}/goals/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -193,7 +194,7 @@ const handleUpdateSaved = async () => {
     }),
   });
 
-  const res = await fetch(`http://localhost:5000/api/goals/${id}`);
+  const res = await fetch(`http://localhost:5000/api/users/${currentUser.id}/goals/${id}`);
   const updated = await res.json();
   setGoal(updated);
   setEditMode(false);
